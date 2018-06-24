@@ -10,14 +10,32 @@ export default class DBHelper {
    */
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
-    return `http://localhost:${port}/restaurants`;
+    return `http://localhost:${port}`;
   }
 
   /**
    * Fetch all restaurants.
    */
   static fetchRestaurants() {
-    return fetch(DBHelper.DATABASE_URL)
+    return fetch(`${DBHelper.DATABASE_URL}/restaurants`)
+      .then(response => {
+        if (!response.ok) {
+          throw (`Request failed. Returned status of ${response.status}, status text: ${response.statusText}`);
+        }
+        return response.json();
+      });
+  }
+
+  /**
+   * Favorite/unfavorite a restaurant.
+   */
+  static updateFavoriteRestaurant(id, favorite = true) {
+    return fetch(`${DBHelper.DATABASE_URL}/restaurants/${id}?is_favorite=${favorite}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
       .then(response => {
         if (!response.ok) {
           throw (`Request failed. Returned status of ${response.status}, status text: ${response.statusText}`);

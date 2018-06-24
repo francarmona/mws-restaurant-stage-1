@@ -27,6 +27,13 @@ export default class IdbRestaurants {
     });
   }
 
+  static update(restaurant) {
+    IdbRestaurants.db.then(db => {
+      const tx = db.transaction('restaurants', 'readwrite');
+      tx.objectStore('restaurants').put(restaurant);
+    });
+  }
+
   static getAll() {
     return IdbRestaurants.db.then(db => {
       return db.transaction('restaurants')

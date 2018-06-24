@@ -4,6 +4,7 @@ import ImgUtils from './imgutils';
 import LazyImgs from './lazyImgs';
 import 'whatwg-fetch';
 import 'intersection-observer';
+import Utils from './utils';
 
 class RestaurantInfo {
   constructor() {
@@ -81,8 +82,11 @@ class RestaurantInfo {
     if (restaurant.operating_hours) {
       this.fillRestaurantHoursHTML();
     }
+    // create favorite heart
+    document.querySelectorAll('.restaurant-wrapper')[1].append(Utils.createFavoriteHTML(restaurant));
     // fill reviews
     this.fillReviewsHTML();
+
   }
 
   /**

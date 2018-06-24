@@ -4,6 +4,7 @@ import ImgUtils from './imgutils';
 import LazyImgs from './lazyImgs';
 import 'whatwg-fetch';
 import 'intersection-observer';
+import Utils from './utils';
 
 class Main {
   constructor() {
@@ -139,7 +140,7 @@ class Main {
    */
   fillRestaurantsHTML(restaurants = this.restaurants) {
     const ul = document.getElementById('restaurants-list');
-    restaurants.forEach(restaurant => {
+    restaurants.forEach((restaurant) => {
       ul.append(this.createRestaurantHTML(restaurant));
     });
     this.addMarkersToMap();
@@ -179,6 +180,8 @@ class Main {
     more.innerHTML = 'View Details';
     more.href = DBHelper.urlForRestaurant(restaurant);
     div.append(more);
+
+    div.append(Utils.createFavoriteHTML(restaurant));
     li.append(div);
     return li;
   }

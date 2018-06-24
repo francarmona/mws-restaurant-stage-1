@@ -411,3 +411,37 @@ nav h1 a {
   }
 
 }
+
+/* ============== Favourite checkbox =============== */
+[id^="heart"] {
+  position: absolute;
+  left: -100vw;
+}
+
+label[for^="heart"] {
+  color: #bfbfbf;
+  cursor: pointer;
+  font-size: 1.5em;
+  align-self: center;
+  transition: color 0.2s ease-in-out;
+}
+
+label[for^="heart"]:hover {
+  color: #949494;
+}
+
+label[for^="heart"]::selection {
+  background: transparent;
+}
+
+[id^="heart"]:checked + label {
+  color: #e01f47;
+  will-change: font-size;
+}
+
+label[for^="heart"] > .favorite-text {
+  font-size: .7em;
+}
+
+
+

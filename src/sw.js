@@ -47,7 +47,7 @@ if (workbox) {
 
   // Restaurants API request
   workbox.routing.registerRoute(
-    new RegExp(DBHelper.DATABASE_URL),
+    new RegExp(`${DBHelper.DATABASE_URL}/restaurants`),
     ({url, event, params}) => {
       event.respondWith(
         fetch(event.request)

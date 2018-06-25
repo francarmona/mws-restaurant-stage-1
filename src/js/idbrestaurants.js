@@ -34,6 +34,15 @@ export default class IdbRestaurants {
     });
   }
 
+  static saveReviews(idRestaurant, reviews) {
+    // IdbRestaurants.db.then(db => {
+    //   const tx = db.transaction('restaurants', 'readwrite');
+    //   restaurants.map((restaurant) => {
+    //     tx.objectStore('restaurants').put(restaurant);
+    //   });
+    // });
+  }
+
   static getAll() {
     return IdbRestaurants.db.then(db => {
       return db.transaction('restaurants')

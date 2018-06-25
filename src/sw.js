@@ -56,6 +56,7 @@ if (workbox) {
               .then(restaurants => {
                 // Update restaurants in indexedDB
                 IdbRestaurants.save(restaurants);
+                console.log('RESTAURANTS',restaurants);
                 return response;
               });
           })
@@ -67,6 +68,34 @@ if (workbox) {
                   headers: {'Content-Type': 'application/json'}
                 });
               });
+          })
+      );
+    }
+  );
+
+  // Restaurant reviews API request
+  workbox.routing.registerRoute(
+    new RegExp(`${DBHelper.DATABASE_URL}/reviews\\?restaurant_id=\\d`),
+    ({url, event, params}) => {
+      event.respondWith(
+        fetch(event.request)
+          .then(response => {
+            return response.clone().json()
+              .then(reviews => {
+                // Update restaurant reviews in indexedDB
+                //IdbRestaurants.saveRestaurantReviews(url.searchParams.get('restaurant_id'), reviews);
+                return response;
+              });
+          })
+          .catch(function(error) {
+            console.log('ERROR',error);
+            // If no network connection, returns reviews from indexedDB
+            // return IdbRestaurants.getRestaurantReviews(idRestaurant)
+            //   .then(reviews => {
+            //     return new Response(JSON.stringify(reviews), {
+            //       headers: {'Content-Type': 'application/json'}
+            //     });
+            //   });
           })
       );
     }

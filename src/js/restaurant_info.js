@@ -43,6 +43,7 @@ class RestaurantInfo {
       return;
     }
     const id = this.getParameterByName('id');
+    //DBHelper.fetchReviews(id);
     if (!id) { // no id found in URL
       callback('No restaurant id in URL', null);
     } else {

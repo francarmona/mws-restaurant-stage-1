@@ -166,4 +166,20 @@ export default class DBHelper {
       });
   }
 
+  static createRestaurantReview(review) {
+    return fetch(`${DBHelper.DATABASE_URL}/reviews`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(review)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw (`Request failed. Returned status of ${response.status}, status text: ${response.statusText}`);
+        }
+        return response.json();
+      });
+  }
+
 }

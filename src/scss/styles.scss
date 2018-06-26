@@ -280,11 +280,21 @@ nav h1 a {
   text-transform: uppercase;
 }
 
-#restaurant-container,
-#reviews-container {
+#restaurant-container {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;
   padding: 30px 20px;
+  width: 100%;
+}
+
+#reviews-container {
+  border-top: 1px solid #fff;
+  padding: 30px 20px 0px 20px;
+  width: 100%;
+}
+
+#new-review {
+  padding: 0px 20px 30px 20px;
   width: 100%;
 }
 
@@ -302,13 +312,21 @@ nav h1 a {
   padding-bottom: 1pt;
 }
 
+#new-review h3 {
+    color: #f58500;
+    font-size: 1.3rem;
+    font-weight: 300;
+    letter-spacing: -1px;
+    padding-bottom: 1pt;
+  }
+
 .restaurant-wrapper {
   width: 100%;
 }
 
 #reviews-list {
   margin: 0;
-  padding: 0 0 60px;
+  padding: 0;
 }
 
 #reviews-list li {
@@ -375,8 +393,6 @@ nav h1 a {
   text-align: center;
   text-transform: uppercase;
   box-sizing: border-box;
-  bottom: 0;
-  position: absolute;
   width: 100%;
 }
 
@@ -441,6 +457,15 @@ label[for^="heart"]::selection {
 
 label[for^="heart"] > .favorite-text {
   font-size: .7em;
+}
+
+#form-review {
+  input[type="text"], textarea {
+    display: block;
+  }
+  .form-group {
+    padding-bottom: 10px;
+  }
 }
 
 

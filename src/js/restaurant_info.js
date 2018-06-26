@@ -5,6 +5,7 @@ import LazyImgs from './lazyImgs';
 import 'whatwg-fetch';
 import 'intersection-observer';
 import Utils from './utils';
+import IdbRestaurants from './idbrestaurants';
 
 class RestaurantInfo {
   constructor() {
@@ -53,6 +54,7 @@ class RestaurantInfo {
             this.restaurant.reviews = reviews;
             this.fillRestaurantHTML();
             new LazyImgs('.restaurant-img');
+            this.setSubmitReviewHandler(id);
             callback(null, restaurant);
           })
           .catch((error) => {
@@ -196,6 +198,24 @@ class RestaurantInfo {
     if (!results[2])
       return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
+  setSubmitReviewHandler(restaurantId) {
+    document.getElementById('review-submit').addEventListener('click', (event) => {
+      event.preventDefault();
+      DBHelper.createRestaurantReview({
+        'restaurant_id': parseInt(restaurantId),
+        'name': document.getElementById('reviewer-name').value,
+        'rating': parseInt(document.querySelector('input[name="rating"]:checked').value),
+        'comments': document.getElementById('review').value
+      }).then((review) => {
+        // Add review to list and to indexeddb
+        const ul = document.getElementById('reviews-list');
+        ul.appendChild(this.createReviewHTML(review));
+        IdbRestaurants.saveRestaurantReview(restaurantId, review);
+        document.querySelector('#form-review').reset();
+      });
+    });
   }
 }
 

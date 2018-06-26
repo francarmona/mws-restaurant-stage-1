@@ -43,20 +43,23 @@ class RestaurantInfo {
       return;
     }
     const id = this.getParameterByName('id');
-    //DBHelper.fetchReviews(id);
     if (!id) { // no id found in URL
       callback('No restaurant id in URL', null);
     } else {
-      DBHelper.fetchRestaurantById(id)
-        .then((restaurant) => {
-          this.restaurant = restaurant;
-          this.fillRestaurantHTML();
-          new LazyImgs('.restaurant-img');
-          callback(null, restaurant);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      DBHelper.fetchRestaurantReviews(id).then((reviews) => {
+        DBHelper.fetchRestaurantById(id)
+          .then((restaurant) => {
+            this.restaurant = restaurant;
+            this.restaurant.reviews = reviews;
+            this.fillRestaurantHTML();
+            new LazyImgs('.restaurant-img');
+            callback(null, restaurant);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      });
+
     }
   }
 
@@ -146,7 +149,7 @@ class RestaurantInfo {
 
     const date = document.createElement('div');
     date.className = 'review-date';
-    date.innerHTML = review.date;
+    date.innerHTML = new Date(review.createdAt).toDateString();
     divContainer.appendChild(date);
 
     li.appendChild(divContainer);

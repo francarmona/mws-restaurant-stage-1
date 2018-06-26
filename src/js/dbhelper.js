@@ -45,19 +45,6 @@ export default class DBHelper {
   }
 
   /**
-   * Fetch restaurant review.
-   */
-  static fetchReviews(idRestaurant) {
-    return fetch(`${DBHelper.DATABASE_URL}/reviews?restaurant_id=${idRestaurant}`)
-      .then(response => {
-        if (!response.ok) {
-          throw (`Request failed. Returned status of ${response.status}, status text: ${response.statusText}`);
-        }
-        return response.json();
-      });
-  }
-
-  /**
    * Fetch a restaurant by its ID.
    */
   static fetchRestaurantById(id) {
@@ -164,6 +151,19 @@ export default class DBHelper {
       animation: google.maps.Animation.DROP}
     );
     return marker;
+  }
+
+  /**
+   * Fetch restaurant review.
+   */
+  static fetchRestaurantReviews(idRestaurant) {
+    return fetch(`${DBHelper.DATABASE_URL}/reviews?restaurant_id=${idRestaurant}`)
+      .then(response => {
+        if (!response.ok) {
+          throw (`Request failed. Returned status of ${response.status}, status text: ${response.statusText}`);
+        }
+        return response.json();
+      });
   }
 
 }

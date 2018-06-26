@@ -15,6 +15,9 @@ export default class IdbRestaurants {
       upgradeDB.createObjectStore('restaurants', {
         keyPath: 'id'
       });
+      upgradeDB.createObjectStore('reviews', {
+        keyPath: 'id',
+      }).createIndex('restaurant_id', 'restaurant_id');
     });
   }
 
@@ -34,19 +37,35 @@ export default class IdbRestaurants {
     });
   }
 
-  static saveReviews(idRestaurant, reviews) {
-    // IdbRestaurants.db.then(db => {
-    //   const tx = db.transaction('restaurants', 'readwrite');
-    //   restaurants.map((restaurant) => {
-    //     tx.objectStore('restaurants').put(restaurant);
-    //   });
-    // });
+  static saveRestaurantReviews(idRestaurant, reviews) {
+    IdbRestaurants.db.then(db => {
+      const tx = db.transaction('reviews', 'readwrite');
+      reviews.map((review) => {
+        tx.objectStore('reviews').put(review);
+      });
+    });
   }
 
   static getAll() {
     return IdbRestaurants.db.then(db => {
       return db.transaction('restaurants')
         .objectStore('restaurants').getAll();
+    });
+  }
+
+  static getAllReviews() {
+    return IdbRestaurants.db.then(db => {
+      return db.transaction('reviews')
+        .objectStore('reviews').getAll();
+    });
+  }
+
+  static getRestaurantReviews(idRestaurant) {
+    return IdbRestaurants.db.then(db => {
+      return db.transaction('reviews')
+        .objectStore('reviews')
+        .index('restaurant_id')
+        .getAll(parseInt(idRestaurant));
     });
   }
 

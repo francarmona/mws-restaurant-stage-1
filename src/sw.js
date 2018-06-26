@@ -56,7 +56,6 @@ if (workbox) {
               .then(restaurants => {
                 // Update restaurants in indexedDB
                 IdbRestaurants.save(restaurants);
-                console.log('RESTAURANTS',restaurants);
                 return response;
               });
           })
@@ -83,19 +82,19 @@ if (workbox) {
             return response.clone().json()
               .then(reviews => {
                 // Update restaurant reviews in indexedDB
-                //IdbRestaurants.saveRestaurantReviews(url.searchParams.get('restaurant_id'), reviews);
+                IdbRestaurants.saveRestaurantReviews(url.searchParams.get('restaurant_id'), reviews);
                 return response;
               });
           })
           .catch(function(error) {
             console.log('ERROR',error);
             // If no network connection, returns reviews from indexedDB
-            // return IdbRestaurants.getRestaurantReviews(idRestaurant)
-            //   .then(reviews => {
-            //     return new Response(JSON.stringify(reviews), {
-            //       headers: {'Content-Type': 'application/json'}
-            //     });
-            //   });
+            return IdbRestaurants.getRestaurantReviews(url.searchParams.get('restaurant_id'))
+              .then(reviews => {
+                return new Response(JSON.stringify(reviews), {
+                  headers: {'Content-Type': 'application/json'}
+                });
+              });
           })
       );
     }

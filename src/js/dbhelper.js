@@ -1,4 +1,5 @@
 /*global google*/
+
 /**
  * Common database helper functions.
  */
@@ -181,5 +182,7 @@ export default class DBHelper {
         return response.json();
       });
   }
+
+
 
 }

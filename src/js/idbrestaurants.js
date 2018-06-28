@@ -18,6 +18,10 @@ export default class IdbRestaurants {
       upgradeDB.createObjectStore('reviews', {
         keyPath: 'id',
       }).createIndex('restaurant_id', 'restaurant_id');
+      upgradeDB.createObjectStore('pendingReviews', {
+        keyPath: 'id',
+        autoIncrement: true
+      });
     });
   }
 
@@ -37,7 +41,7 @@ export default class IdbRestaurants {
     });
   }
 
-  static saveRestaurantReviews(idRestaurant, reviews) {
+  static saveRestaurantReviews(reviews) {
     IdbRestaurants.db.then(db => {
       const tx = db.transaction('reviews', 'readwrite');
       reviews.map((review) => {
@@ -46,10 +50,32 @@ export default class IdbRestaurants {
     });
   }
 
-  static saveRestaurantReview(idRestaurant, review) {
+  static saveRestaurantReview(review) {
     IdbRestaurants.db.then(db => {
       const tx = db.transaction('reviews', 'readwrite');
       tx.objectStore('reviews').put(review);
+    });
+  }
+
+  static saveRestaurantPendingReview(pendingReview) {
+    IdbRestaurants.db.then(db => {
+      const tx = db.transaction('pendingReviews', 'readwrite');
+      console.log(pendingReview);
+      tx.objectStore('pendingReviews').put(pendingReview);
+    });
+  }
+
+  static deleteRestaurantPendingReview(id) {
+    IdbRestaurants.db.then(db => {
+      const tx = db.transaction('pendingReviews', 'readwrite');
+      tx.objectStore('pendingReviews').delete(id);
+    });
+  }
+
+  static getAllPendingReviews() {
+    return IdbRestaurants.db.then(db => {
+      return db.transaction('pendingReviews')
+        .objectStore('pendingReviews').getAll();
     });
   }
 

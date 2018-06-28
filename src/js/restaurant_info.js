@@ -12,6 +12,9 @@ class RestaurantInfo {
     this.restaurant = undefined;
     this.map = undefined;
     this.initMap();
+    window.addEventListener('online',  () => {
+      this.syncPendingReviews();
+    });
   }
 
   /**
@@ -203,18 +206,41 @@ class RestaurantInfo {
   setSubmitReviewHandler(restaurantId) {
     document.getElementById('review-submit').addEventListener('click', (event) => {
       event.preventDefault();
-      DBHelper.createRestaurantReview({
+      const review = {
         'restaurant_id': parseInt(restaurantId),
         'name': document.getElementById('reviewer-name').value,
         'rating': parseInt(document.querySelector('input[name="rating"]:checked').value),
         'comments': document.getElementById('review').value
-      }).then((review) => {
+      };
+      DBHelper.createRestaurantReview(review).then((review) => {
         // Add review to list and to indexeddb
+        IdbRestaurants.saveRestaurantReview(review);
         const ul = document.getElementById('reviews-list');
         ul.appendChild(this.createReviewHTML(review));
-        IdbRestaurants.saveRestaurantReview(restaurantId, review);
+        document.querySelector('#form-review').reset().reset();
+      }).catch(() => {
+        // TODO show message to user: you are offline the review will be sent automatically when you were online again
+
+        if(!navigator.onLine){
+          IdbRestaurants.saveRestaurantPendingReview(review);
+        }
         document.querySelector('#form-review').reset();
       });
+    });
+  }
+
+  syncPendingReviews() {
+    IdbRestaurants.getAllPendingReviews().then((pendingReviews) => {
+      if(pendingReviews && pendingReviews.length > 0) {
+        pendingReviews.forEach((pendingReview) => {
+          DBHelper.createRestaurantReview(pendingReview).then((review) => {
+            IdbRestaurants.saveRestaurantReview(review);
+            IdbRestaurants.deleteRestaurantPendingReview(pendingReview.id);
+            const ul = document.getElementById('reviews-list');
+            ul.appendChild(this.createReviewHTML(review));
+          });
+        });
+      }
     });
   }
 }

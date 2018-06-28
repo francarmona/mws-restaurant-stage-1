@@ -82,7 +82,7 @@ if (workbox) {
             return response.clone().json()
               .then(reviews => {
                 // Update restaurant reviews in indexedDB
-                IdbRestaurants.saveRestaurantReviews(url.searchParams.get('restaurant_id'), reviews);
+                IdbRestaurants.saveRestaurantReviews(reviews);
                 return response;
               });
           })

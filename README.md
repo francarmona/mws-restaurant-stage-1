@@ -1,5 +1,4 @@
 # Mobile Web Specialist Certification Course
----
 
 > An offline first restaurant app.
 

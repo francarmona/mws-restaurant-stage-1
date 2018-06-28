@@ -384,48 +384,124 @@ nav h1 a {
   font-weight: 300;
 }
 
-.footer {
-  background-color: #444;
-  color: #aaa;
-  font-size: .9rem;
-  letter-spacing: 1px;
-  padding: 25px;
-  text-align: center;
-  text-transform: uppercase;
-  box-sizing: border-box;
-  width: 100%;
+
+#form-review {
+  input[type="text"] {
+    display: block;
+    height: 48px;
+    font-size: .9rem;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    padding: 0 10px;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    display: block;
+    font-size: .9rem;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .form-group {
+    padding-bottom: 25px;
+  }
+
+  button {
+    height: 48px;
+    background-color: orange;
+    border-radius: 4px;
+    color: white;
+    font-size: .9rem;
+    padding: 8px 30px 10px;
+    &:hover, &:focus {
+      background-color: #d88c00;
+      color: #fff;
+      cursor: pointer;
+    }
+    width: 100%;
+  }
+
+  .rating {
+    h4 {
+      margin: 0 0 4px 0;
+      font-weight: normal;
+    }
+  }
 }
 
-@media screen and (min-width: 800px) {
-
-  .restaurants-list {
-    justify-content: space-between;
+.review-status-wrapper {
+  &.error {
+    color: red;
   }
 
-  .restaurants-list li {
-    width: calc(50% - 15px);
+  &.success {
+    color: green;
   }
-
-  .filter-options select {
-    width: calc(50% - 2px);
-  }
-
-  .restaurant-wrapper {
-    width: calc(50% - 15px);
-  }
-
 }
 
-@media screen and (min-width: 1190px) {
+/* ============== Custom radio button ============== */
+.radio-container {
+  display: block;
+  position: relative;
+  padding: 0 10px 15px 35px;
+  cursor: pointer;
+  font-size: 1rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-  .restaurants-list li {
-    width: calc(33% - 15px);
-  }
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
 
-  .filter-options select {
-    width: 33%;
-  }
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
 
+.radio-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.radio-container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radio-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.radio-container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }
 
 /* ============== Favourite checkbox =============== */
@@ -459,13 +535,63 @@ label[for^="heart"] > .favorite-text {
   font-size: .7em;
 }
 
-#form-review {
-  input[type="text"], textarea {
-    display: block;
+.footer {
+  background-color: #444;
+  color: #aaa;
+  font-size: .9rem;
+  letter-spacing: 1px;
+  padding: 25px;
+  text-align: center;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+
+  .restaurants-list {
+    justify-content: space-between;
   }
-  .form-group {
-    padding-bottom: 10px;
+
+  .restaurants-list li {
+    width: calc(50% - 15px);
   }
+
+  .filter-options select {
+    width: calc(50% - 2px);
+  }
+
+  .restaurant-wrapper {
+    width: calc(50% - 15px);
+  }
+
+  #form-review {
+    input[type="text"] {
+      width: 33%;
+    }
+
+    button {
+      width: 150px;
+    }
+  }
+
+  .radio-container {
+    display: inline-block;
+    padding: 0 10px 0 35px;
+  }
+
+}
+
+@media screen and (min-width: 1190px) {
+
+  .restaurants-list li {
+    width: calc(33% - 15px);
+  }
+
+  .filter-options select {
+    width: 33%;
+  }
+
 }
 
 

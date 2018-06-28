@@ -40,31 +40,44 @@
         <form action="" method="post" role="form" id="form-review">
           <div class="form-group">
             <label for="reviewer-name">Name</label>
-            <input id="reviewer-name" aria-label="Enter name" placeholder="Name" name="name" type="text" required aria-required="true">
+            <input id="reviewer-name" aria-label="Enter name" name="name" type="text" required aria-required="true">
           </div>
           <div class="form-group">
             <label for="review">Review</label>
-            <textarea name="review" id="review" rows="5" placeholder="Review" aria-label="Enter review" required aria-required="true"></textarea>
+            <textarea name="review" id="review" rows="5" aria-label="Enter review" required aria-required="true"></textarea>
           </div>
-          <div class="form-group">
+          <div class="form-group rating">
             <h4>Rating</h4>
-            <label for="rating5" tabindex="0" aria-label="Rating 5">
-              <input checked type="radio" id="rating5" name="rating" value="5"> 5 - The perfect restaurant!
+            <label for="rating5" tabindex="0" aria-label="Rating 5" class="radio-container">
+              5 - The perfect restaurant!
+              <input checked type="radio" id="rating5" name="rating" value="5">
+              <span class="checkmark"></span>
             </label>
-            <label for="rating4" tabindex="0" aria-label="Rating 4">
-              <input type="radio" id="rating4" name="rating" value="4"> 4 - Good restaurant!
+            <label for="rating4" tabindex="0" aria-label="Rating 4" class="radio-container">
+              4 - Good restaurant!
+              <input type="radio" id="rating4" name="rating" value="4">
+              <span class="checkmark"></span>
             </label>
-            <label for="rating3" tabindex="0" aria-label="Rating 3">
-              <input type="radio" id="rating3" name="rating" value="3"> 3 - Not bad!
+            <label for="rating3" tabindex="0" aria-label="Rating 3" class="radio-container">
+              3 - Not bad!
+              <input type="radio" id="rating3" name="rating" value="3">
+              <span class="checkmark"></span>
             </label>
-            <label for="rating2" tabindex="0" aria-label="Rating 2">
-              <input type="radio" id="rating2" name="rating" value="2"> 2 - Ok!
+            <label for="rating2" tabindex="0" aria-label="Rating 2" class="radio-container">
+              2 - Ok!
+              <input type="radio" id="rating2" name="rating" value="2">
+              <span class="checkmark"></span>
             </label>
-            <label for="rating1" tabindex="0" aria-label="Rating 1">
-              <input type="radio" id="rating1" name="rating" value="1"> 1 - Not recommended!
+            <label for="rating1" tabindex="0" aria-label="Rating 1" class="radio-container">
+              1 - Not recommended!
+              <input type="radio" id="rating1" name="rating" value="1">
+              <span class="checkmark"></span>
             </label>
           </div>
           <button type="submit" id="review-submit">Send review</button>
+          <div class="review-status-wrapper">
+            <p class="review-status-message"></p>
+          </div>
         </form>
       </section>
     </main>

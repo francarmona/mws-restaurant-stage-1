@@ -218,10 +218,10 @@ class RestaurantInfo {
         const ul = document.getElementById('reviews-list');
         ul.appendChild(this.createReviewHTML(review));
         document.querySelector('#form-review').reset().reset();
+        this.setSuccesReviewMessage();
       }).catch(() => {
-        // TODO show message to user: you are offline the review will be sent automatically when you were online again
-
         if(!navigator.onLine){
+          this.setErrorReviewMessage();
           IdbRestaurants.saveRestaurantPendingReview(review);
         }
         document.querySelector('#form-review').reset();
@@ -238,10 +238,23 @@ class RestaurantInfo {
             IdbRestaurants.deleteRestaurantPendingReview(pendingReview.id);
             const ul = document.getElementById('reviews-list');
             ul.appendChild(this.createReviewHTML(review));
+            this.setSuccesReviewMessage();
           });
         });
       }
     });
+  }
+
+  setSuccesReviewMessage() {
+    document.querySelector('.review-status-message').innerHTML = 'Your review has been succesfully submitted.';
+    document.querySelector('.review-status-wrapper').classList.add('success');
+    document.querySelector('.review-status-wrapper').classList.remove('error');
+  }
+
+  setErrorReviewMessage() {
+    document.querySelector('.review-status-message').innerHTML = 'You have not internet connection! Your review will be submitted as soon as you go online.';
+    document.querySelector('.review-status-wrapper').classList.add('error');
+    document.querySelector('.review-status-wrapper').classList.remove('success');
   }
 }
 

@@ -20,6 +20,12 @@ export default class Utils {
       // Update favorite status
       DBHelper.updateFavoriteRestaurant(restaurant.id, this.checked).then((restaurant) => {
         IdbRestaurants.update(restaurant);
+        if(this.checked){
+          document.querySelector(`label[for=heart${restaurant.id}] > span`).innerHTML = 'Marked as favorite';
+        } else {
+          document.querySelector(`label[for=heart${restaurant.id}] > span`).innerHTML = 'No marked as favorite';
+        }
+
       });
     });
     const label = document.createElement('label');
@@ -27,7 +33,7 @@ export default class Utils {
     label.innerHTML = '❤';
     const labelText = document.createElement('span');
     labelText.className = 'favorite-text';
-    labelText.innerHTML = ' Favourite';
+    labelText.innerHTML = heartCheckbox.checked ? 'Marked as favorite' : 'No marked as favorite';
     label.append(labelText);
     favorite.append(heartCheckbox);
     favorite.append(label);

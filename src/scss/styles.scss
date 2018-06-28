@@ -532,7 +532,9 @@ label[for^="heart"]::selection {
 }
 
 label[for^="heart"] > .favorite-text {
-  font-size: .7em;
+  font-size: .65em;
+  font-weight: 200;
+  padding-left: 5px;
 }
 
 .footer {

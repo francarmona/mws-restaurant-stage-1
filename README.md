@@ -9,7 +9,7 @@
 # Install dependencies
 npm install
 ```
-###Production
+### Production
 ```shell
 gulp --env production build
 cd dist
@@ -21,7 +21,7 @@ python3 -m http.server 8000
 ```
 Then, open [http://localhost:8000](http://localhost:8000/)
 
-###Development
+### Development
 ```shell
 gulp serve
 ```

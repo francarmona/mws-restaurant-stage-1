@@ -1,0 +1,135 @@
+@charset "utf-8";
+
+@import 'common';
+@import 'favoriteCheckbox';
+@import 'footer';
+
+#map {
+  height: 400px;
+  width: 100%;
+  background-color: #ccc;
+}
+
+.search-container {
+  width: 100%;
+}
+
+.filter-options {
+  height: 125px;
+  background-color: #3397db;
+  align-items: center;
+  padding: 20px 30px;
+}
+
+.filter-options h2 {
+  color: white;
+  font-weight: normal;
+  line-height: 1;
+}
+
+.filter-options select {
+  background-color: white;
+  border: 1px solid #fff;
+  font-family: Roboto,sans-serif;
+  font-size: .9rem;
+  height: 35px;
+  letter-spacing: 0;
+  padding: 0 10px;
+  margin: 0 0 10px;
+  width: 100%;
+}
+
+.restaurants-list {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f3f3f3;
+  list-style: outside none none;
+  margin: 0;
+  padding: 30px 20px 80px;
+  text-align: center;
+}
+
+.restaurants-list li {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 30px 0;
+  font-family: Roboto,sans-serif;
+  min-height: 380px;
+  text-align: left;
+}
+
+.restaurants-list .restaurant-img {
+  background-color: #ccc;
+  display: block;
+  margin: 0;
+  max-width: 100%;
+  min-height: 248px;
+  min-width: 100%;
+  border-radius: 30px 0 0;
+}
+
+.restaurants-list .restaurant-info {
+  padding: 0 20px 20px;
+}
+
+.restaurants-list li h2 {
+  color: #f18200;
+  font-family: Roboto,sans-serif;
+  font-size: 1.3rem;
+  font-weight: 200;
+  letter-spacing: 0;
+  line-height: 1.3;
+  margin: 20px 0 10px;
+  text-transform: uppercase;
+}
+
+.restaurants-list p {
+  margin: 0;
+}
+
+.restaurants-list li a.more-button {
+  background-color: orange;
+  border-bottom: 3px solid #eee;
+  color: #fff;
+  display: inline-block;
+  margin: 15px 0 0;
+  padding: 8px 30px 10px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.restaurants-list .more-button:hover,
+.restaurants-list .more-button:focus {
+  background-color: #d88c00;
+  color: #fff;
+}
+
+@media screen and (min-width: 800px) {
+
+  .restaurants-list {
+    justify-content: space-between;
+  }
+
+  .restaurants-list li {
+    width: calc(50% - 15px);
+  }
+
+  .filter-options select {
+    width: calc(50% - 2px);
+  }
+
+}
+
+@media screen and (min-width: 1190px) {
+
+  .restaurants-list li {
+    width: calc(33% - 15px);
+  }
+
+  .filter-options select {
+    width: 33%;
+  }
+
+}
